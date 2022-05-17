@@ -20,5 +20,4 @@ router.post('/', checkCarPayload, checkVinNumberValid, checkVinNumberUnique, (re
     })
 })
 
-
 module.exports = router;

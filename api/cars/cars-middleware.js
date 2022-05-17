@@ -15,19 +15,19 @@ const checkCarId = (req, res, next) => {
 }
 
 const checkCarPayload = (req, res, next) => {
-  if (req.body.vin == null) {
+  if (typeof req.body.vin !== "string" ) {
     res.status(400).json({ message: "vin is missing" })
     return;
   }
-  if (req.body.make == null) {
+  if (typeof req.body.make !== "string" || req.body.make.trim() === "") {
     res.status(400).json({ message: "make is missing" });
     return;
   }
-  if (req.body.model == null) {
+  if (typeof req.body.model !== "string" || req.body.model.trim() === "") {
     res.status(400).json({ message: "model is missing" });
     return;
   }
-  if (req.body.mileage == null) {
+  if (typeof req.body.mileage !== "number" || isNaN(req.body.mileage)) {
     res.status(400).json({ message: "mileage is missing" });
     return;
   }
@@ -55,31 +55,6 @@ const checkVinNumberUnique = (req, res, next) => {
   })
 }
 
-
-
 module.exports = {
   checkCarId, checkCarPayload, checkVinNumberValid, checkVinNumberUnique
 }
-
-
-
-
-// const checkCarPayload = (req, res, next) => {
-//   if (typeof req.body.vin !== "string" ) {
-//     res.status(400).json({ message: "vin is missing" })
-//     return;
-//   }
-//   if (typeof req.body.make !== "string" || req.body.make.trim() === "") {
-//     res.status(400).json({ message: "make is missing" });
-//     return;
-//   }
-//   if (typeof req.body.model !== "string" || req.body.model.trim() === "") {
-//     res.status(400).json({ message: "model is missing" });
-//     return;
-//   }
-//   if (typeof req.body.mileage !== "number" || isNaN(req.body.mileage)) {
-//     res.status(400).json({ message: "mileage is missing" });
-//     return;
-//   }
-//   next();
-// }
